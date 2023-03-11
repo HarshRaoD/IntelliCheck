@@ -9,3 +9,4 @@ Project for AIfinity Hackathon
 4) Install all requiered libraries ```pip install -r requirements.txt```    
 5) To run type ```python Backend.py```
 6) Keep checking a regular intervals and updating requierments.txt using ```pip freeze```    
+7) For Jupyter Notebook setup refer to this [page](https://anbasile.github.io/posts/2017-06-25-jupyter-venv/)
