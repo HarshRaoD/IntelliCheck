@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
 def seperate_each_line(img) -> list:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -37,10 +38,32 @@ def seperate_each_line(img) -> list:
 
     return cropped_images
 
+def get_answer_text(img) -> str:
+    # 1) Seperate each image into seperate lines
+    line_images = seperate_each_line(img)
+
+    # 2) For each line call the OCR model
+    answer_text = ""
+    processor = TrOCRProcessor.from_pretrained('microsoft/trocr-base-handwritten')
+    model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-base-handwritten')
+    for line in line_images:
+        pixel_values = processor(images=line, return_tensors="pt").pixel_values
+        generated_ids = model.generate(pixel_values)
+        generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+        answer_text += generated_text + " \n"
+
+    return answer_text
+
 def __test_seperate_each_line(lineNo=0):
     img = cv2.imread("C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\MultiLine_OCR_Test2.jpeg")
     line_images = seperate_each_line(img)
     plt.imshow(line_images[lineNo])
     plt.show()
 
+def __test_get_answer_text():
+    img = cv2.imread("C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\MultiLine_OCR_Test3.jpeg")
+    results = get_answer_text(img)
+    print("------------ Multiline Results ---------- \n ", results)
+
 # __test_seperate_each_line(3)
+__test_get_answer_text()
