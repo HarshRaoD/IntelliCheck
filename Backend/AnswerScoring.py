@@ -69,7 +69,7 @@ def compare_answer(sample_answer: str, student_entities : dict):
             if not(set(value).issubset(set(student_entities[key]))):
                 for word in value:
                     if word not in set(student_entities[key]):
-                        error_message += "You didnt include the " + key + " '" + value + "'. " 
+                        error_message += "You didnt include the " + key + " '" + word + "'. " 
                 answer_correct = False
         else:
             for verb in value:
@@ -109,10 +109,10 @@ def __test_get_verbs():
     print(get_verbs("Man walks into a bar. He ate food."))
 
 def __test_check_answer():
-    img = "C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\EndToEnd_Test1.jpeg"
+    img = "C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\EndToEnd_Test2.jpeg"
     sample_answers = ["1965", "Lee Kuan Yew"]
 
     results = check_answer(sample_answers, img)
     print("Results = ", results)
 
-# __test_check_answer()
+__test_check_answer()
