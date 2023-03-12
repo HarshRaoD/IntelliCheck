@@ -2,6 +2,7 @@ import streamlit as st
 import AnswerScoring as asc
 import numpy as np
 import cv2
+from PIL import Image
 # Set the name of the app as the title
 st.set_page_config(page_title='IntelliCheck App')
 
@@ -33,15 +34,13 @@ if choice == "Upload Q&A":
 if choice == "Check Student's answer":
      st.subheader("OCR Answer Checking")
      
-     img = st.file_uploader("Please upload an image")
-     if img is not None:
-          with open(img.name,'wb') as f:
-               f.write(img.read())
-     st.image(img)
+     uploaded_file = st.file_uploader("Please upload an image")
+     image = Image.open(uploaded_file)
+     st.image(image)
+     img_array = np.array(image)
      submit_button = st.button("Submit Answer and Assign marks!")
      if(submit_button):
-          if f is not None:
-               result = asc.check_answer(st.session_state["list_of_points"],  f)
+               result = asc.check_answer(st.session_state["list_of_points"],  img_array)
                st.success("This answer gets: "+ result[0] +" \nThe errors are: "+result[1])
 
           
