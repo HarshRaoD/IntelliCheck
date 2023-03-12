@@ -35,12 +35,15 @@ if choice == "Check Student's answer":
      st.subheader("OCR Answer Checking")
      
      uploaded_file = st.file_uploader("Please upload an image")
-     image = Image.open(uploaded_file)
+     if uploaded_file is not None:
+    # Convert the file to an opencv image.
+       file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+       image = cv2.imdecode(file_bytes, 1)
      st.image(image)
-     img_array = np.array(image)
+     
      submit_button = st.button("Submit Answer and Assign marks!")
      if(submit_button):
-               result = asc.check_answer(st.session_state["list_of_points"],  img_array)
-               st.success("This answer gets: "+ result[0] +" \nThe errors are: "+result[1])
+               result = asc.check_answer(st.session_state["list_of_points"],  image)
+               st.success("This answer gets: "+ str(result[0]) +" \nThe errors are: "+result[1])
 
           

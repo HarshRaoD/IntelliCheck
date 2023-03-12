@@ -69,7 +69,7 @@ def compare_answer(sample_answer: str, student_entities : dict):
             if not(set(value).issubset(set(student_entities[key]))):
                 for word in value:
                     if word not in set(student_entities[key]):
-                        error_message += "You didnt include the " + key + " '" + value + "'. " 
+                        error_message += "You didnt include the " + key + " '" + word + "'. " 
                 answer_correct = False
         else:
             for verb in value:
