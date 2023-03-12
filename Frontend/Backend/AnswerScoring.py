@@ -102,17 +102,5 @@ def check_answer(sample_answers :list, student_answer_img):
     return score, explaination
 
 
-def __test_do_tokenisation():
-    print(do_tokenisation("Sanskar had trouble with poop, while Kshitij had trouble with allergies."))
 
-def __test_get_verbs():
-    print(get_verbs("Man walks into a bar. He ate food."))
 
-def __test_check_answer():
-    img = "C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\EndToEnd_Test1.jpeg"
-    sample_answers = ["1965", "Lee Kuan Yew"]
-
-    results = check_answer(sample_answers, img)
-    print("Results = ", results)
-
-# __test_check_answer()
