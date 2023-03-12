@@ -1,5 +1,7 @@
 import streamlit as st
-
+import AnswerScoring as asc
+import numpy as np
+import cv2
 # Set the name of the app as the title
 st.set_page_config(page_title='IntelliCheck App')
 
@@ -18,8 +20,11 @@ if choice == "Upload Q&A":
         question = st.text_input("Question Number")
         num = int(st.number_input("Enter the the number of marks allotted to this question",step = 1,min_value=0,max_value=100))
         submit_button = st.form_submit_button(label='Enter the answer key')
+        x=[""]*num
         for i in range(num):
                st.session_state[i] = st.text_input(f"Enter the keywords for point {i+1}")
+               x.append(st.session_state[i])
+        st.session_state["list_of_points"] = x
         submit_button = st.form_submit_button(label='Submit Answer key!')
 
     if(submit_button):
@@ -27,9 +32,16 @@ if choice == "Upload Q&A":
        st.success("Sample Answer Key submitted succesfully!")
 if choice == "Check Student's answer":
      st.subheader("OCR Answer Checking")
-     st.session_state["answer"] = st.file_uploader("Please upload an image",accept_multiple_files=True)
-     st.image(st.session_state["answer"])
+     
+     img = st.file_uploader("Please upload an image")
+     if img is not None:
+          with open(img.name,'wb') as f:
+               f.write(img.read())
+     st.image(img)
      submit_button = st.button("Submit Answer and Assign marks!")
      if(submit_button):
-          st.success("This answer gets: ")
+          if f is not None:
+               result = asc.check_answer(st.session_state["list_of_points"],  f)
+               st.success("This answer gets: "+ result[0] +" \nThe errors are: "+result[1])
+
           
