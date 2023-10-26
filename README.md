@@ -1,4 +1,5 @@
-# AutoRegressive-Alliance
+# IntelliCheck
+Automated Exam checker
 Project for AIfinity Hackathon
 
 # Demo
