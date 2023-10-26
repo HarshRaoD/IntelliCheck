@@ -47,10 +47,13 @@ def get_answer_text(img) -> str:
     processor = TrOCRProcessor.from_pretrained('microsoft/trocr-base-handwritten')
     model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-base-handwritten')
     for line in line_images:
-        pixel_values = processor(images=line, return_tensors="pt").pixel_values
-        generated_ids = model.generate(pixel_values)
-        generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
-        answer_text += generated_text + " \n"
+        try:
+            pixel_values = processor(images=line, return_tensors="pt").pixel_values
+            generated_ids = model.generate(pixel_values)
+            generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+            answer_text += generated_text + " \n"
+        except:
+            pass
 
     return answer_text
 
