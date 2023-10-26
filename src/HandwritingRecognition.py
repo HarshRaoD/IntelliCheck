@@ -54,16 +54,5 @@ def get_answer_text(img) -> str:
 
     return answer_text
 
-def __test_seperate_each_line(lineNo=0):
-    img = cv2.imread("C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\MultiLine_OCR_Test2.jpeg")
-    line_images = seperate_each_line(img)
-    plt.imshow(line_images[lineNo])
-    plt.show()
-
-def __test_get_answer_text():
-    img = cv2.imread("C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\MultiLine_OCR_Test5.jpeg")
-    results = get_answer_text(img)
-    print("------------ Multiline Results ---------- \n ", results)
-
 # __test_seperate_each_line(3)
 # __test_get_answer_text()
