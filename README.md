@@ -1,6 +1,9 @@
 # AutoRegressive-Alliance
 Project for AIfinity Hackathon
 
+# Demo
+See the demo notebook [here](repo/blob/main/src/demo.ipynb)
+
 # Backend Setup
 
 1) Go to the backend folder ```cd backend```
