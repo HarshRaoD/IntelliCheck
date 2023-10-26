@@ -47,23 +47,15 @@ def get_answer_text(img) -> str:
     processor = TrOCRProcessor.from_pretrained('microsoft/trocr-base-handwritten')
     model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-base-handwritten')
     for line in line_images:
-        pixel_values = processor(images=line, return_tensors="pt").pixel_values
-        generated_ids = model.generate(pixel_values)
-        generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
-        answer_text += generated_text + " \n"
+        try:
+            pixel_values = processor(images=line, return_tensors="pt").pixel_values
+            generated_ids = model.generate(pixel_values)
+            generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+            answer_text += generated_text + " \n"
+        except:
+            pass
 
     return answer_text
-
-def __test_seperate_each_line(lineNo=0):
-    img = cv2.imread("C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\MultiLine_OCR_Test2.jpeg")
-    line_images = seperate_each_line(img)
-    plt.imshow(line_images[lineNo])
-    plt.show()
-
-def __test_get_answer_text():
-    img = cv2.imread("C:\Harsh Rao Dhanyamraju\Projects\AIfinity Hackathon\AutoRegressive-Alliance\Test\MultiLine_OCR_Test5.jpeg")
-    results = get_answer_text(img)
-    print("------------ Multiline Results ---------- \n ", results)
 
 # __test_seperate_each_line(3)
 # __test_get_answer_text()

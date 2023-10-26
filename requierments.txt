@@ -29,7 +29,7 @@ dill==0.3.6
 en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.5.0/en_core_web_lg-3.5.0-py3-none-any.whl
 executing==1.2.0
 filelock==3.9.0
-flair==0.12.1
+flair>=0.12.1
 Flask==2.2.3
 fonttools==4.39.0
 frozenlist==1.3.3
@@ -88,9 +88,9 @@ Pygments==2.14.0
 pyparsing==3.0.9
 PySocks==1.7.1
 python-dateutil==2.8.2
-pytorch_revgrad==0.2.0
+pytorch_revgrad>=0.2.0
 pytz==2022.7.1
-pywin32==305
+# pywin32==305
 PyYAML==6.0
 pyzmq==25.0.0
 regex==2022.10.31
@@ -106,11 +106,11 @@ tabulate==0.9.0
 thinc==8.1.9
 threadpoolctl==3.1.0
 tokenizers==0.13.2
-torch==1.13.1
+torch>=1.13.1
 tornado==6.2
-tqdm==4.65.0
+tqdm>=4.65.0
 traitlets==5.9.0
-transformer-smaller-training-vocab==0.2.0
+transformer-smaller-training-vocab>=0.2.0
 transformers==4.25.1
 typer==0.7.0
 typing_extensions==4.5.0
