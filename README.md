@@ -2,7 +2,7 @@
 Project for AIfinity Hackathon
 
 # Demo
-See the demo notebook [here](repo/blob/main/src/demo.ipynb)
+See the demo notebook [here](/src/demo.ipynb)
 
 # Backend Setup
 
